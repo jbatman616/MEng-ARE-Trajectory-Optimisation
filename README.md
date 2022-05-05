@@ -1,13 +1,12 @@
-# MEng-VREP_TrajOpter
-Robot Fabricator trajectory optimisation built with CoppeliaSim
+# MEng-ARE-Trajectory-Optimisation
+Robot Fabricator trajectory optimisation built with CoppeliaSim, for use with the Autonomous Robot Evolution project
 
 both scenes were made for CoppeliaSim 4.02.
 
-RobotFabricator PathPlanning CS4_02.ttt contains the path planning program in a script attached to the robot fabricator frame object.
-filepaths will need to be changed to suit whatever computer is running the scene, in loadChassis() and outputFile()
+RobotFabricator Trajectory Generator contains the code to generate an assembly routine for a given robot body. This requires both a .csv file and a .stl file, both of which should be placed in the diverseRobots folder. The .csv file should be named BP----.csv, where ---- is the ID number of the body plan in question. The .stl file should be named mesh----.stl, with ---- being the same ID number. To run this, the 'modelID' variable on the first line of the mainFunction should be modified to match the ID number. Pressing play at that point will start the trajectory generation - this will take a while (around ten minutes, sometimes, though that is obviously highly variable), particularly on slow hardware.
+An error will occur if the scene is run from a recovered autosaved instance - this is because autosaved instances are saved in a different file, and it accesses the file location to get into the diverseRobots file.
+The output of the trajectory generator is stored in the buildInstructions file, as a series of move_j commands. This is to match the api used by the arm.
+The tempLog file exists to store console output. This works occasionally, but not reliably.
 
-RobotFabricator CS4_02.ttt contains a scene to test the instructions output by RobotFabricator PathPlanning CS4_02.ttt. it will need similarly changed filepaths.
+The RobotFabricator Simulator is a simulation of how the arm reacts to being provided with the buildInstructions file. As long as the scene is saved in the correct place and there is a buildInstructions.txt in the In Use folder, then it should simply run the commands in the buildInstructions file without any user input.
 
-additionally, due to differences in file reading between windows and linux, one reads lines with a \n, one strips the \n. if it breaks, this may be why.
-
-included in In Use/diverseRobots are a selection of robot chassis and blueprints.
